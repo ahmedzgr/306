@@ -58,7 +58,7 @@ def service_time(customer_count):
             service.append((round(uniform_var(2, 4), 2), customer_count))
     return service
 
-inter = inter_arrival_time(0.5)
+inter = inter_arrival_time(.5)
 service = service_time(len(inter))
 print(inter)
 print(service_time(len(inter)))
@@ -67,16 +67,17 @@ inter.pop()
 queue = []
 events = [(1, 0, "arrival")]
 is_service_available = True
+final_events = []
 
 while len(events):
     customer, time, event = events.pop(0)
     time = round(time, 2)
-    print(customer, time, event)
+    final_events.append((customer, time, event))
     if event == "arrival":
         if customer < len(inter):
             events.append((customer+1, time + inter[customer], "arrival"))
         if is_service_available:
-            print(customer, time, "service_start")
+            final_events.append((customer, time, "service_start"))
             is_service_available = False
             events.append((customer, time + service[customer][0], "departure"))
         else:
@@ -95,4 +96,8 @@ while len(events):
         raise ValueError(f"Invalid event: {event}")
     events.sort(key=lambda x: x[1])
 
-# print(events)
+with open("output.txt", "w") as f:
+    f.write(f"Inter-arrival times: {inter}\n")
+    f.write(f"Service times: {service}\n")
+    for customer, time, event in final_events:
+        f.write(f"{customer} {time} {event}\n")
