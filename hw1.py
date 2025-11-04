@@ -48,18 +48,15 @@ def inter_arrival_time(hour):
         times.append(round(exponential_var(MEAN_INTERARRIVAL), 2))
     return times
 
-def 
+def service_time(customer_count):
+    service = []
+    for _ in range(customer_count):
+        if rng.rand() < 0.25:
+            service.append(round(uniform_var(2, 7), 2))
+        else:
+            service.append(round(uniform_var(2, 4), 2))
+    return service
 
-print(inter_arrival_time(1))
-
-def sample_payment(rng):
-    u = rng.rand()
-    cumulative = 0.0
-    for method, prob, bounds in PAYMENT_OPTIONS:
-        cumulative += prob
-        if u <= cumulative:
-            service_time = uniform_var(bounds[0], bounds[1], rng)
-            return method, service_time
-    method, _, bounds = PAYMENT_OPTIONS[-1]
-    return method, uniform_var(bounds[0], bounds[1], rng)
-
+inter = inter_arrival_time(0.5)
+print(inter)
+print(service_time(len(inter)))
