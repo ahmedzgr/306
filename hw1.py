@@ -1,6 +1,5 @@
 from math import log
 
-
 # Linear Congruential Generator
 class LCG:
     def __init__(self, seed=541, a=29, c=3, m=1289):
@@ -134,7 +133,7 @@ def simulate(rng):
     for customer in range(len(customers_events)):
         customers_data.append(
             {
-                "is_lucky": True if customers_events[customer][1] < (8.5 * 60) else False,
+                "is_lucky": customers_events[customer][1] < (8.5 * 60),
                 "customer_count": service[customer][1],
                 "service_time": service[customer][0],
                 "waiting_in_queue": (customers_events[customer][1] - customers_events[customer][0] - service[customer][0]) * service[customer][1],
