@@ -1,0 +1,6 @@
+Lucky count: 887 customers
+Unlucky count: 1 customers
+Average lucky waiting: 0.91 minutes
+Average unlucky waiting: 1.14 minutes
+Personnel utility: 0.38 customers
+Average ticket queue length: 0.56 customers
